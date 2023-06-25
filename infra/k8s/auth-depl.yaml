@@ -1,0 +1,37 @@
+# Authentication k8s deployment
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: auth-depl
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: auth
+  template:
+    metadata:
+      labels:
+        app: auth
+    spec:
+      containers:
+        - name: auth
+          image: emmytobs/auth
+          env:
+            - name: JWT_KEY # name of the env variable in the container
+              valueFrom:
+                secretKeyRef:
+                  name: jwt-secret # name of the Secret k8s object. For security reasons, this Secret object was created from the CLI; there's no yaml config file for it.
+                  key: JWT_KEY # name of the entry in the Secret k8s object
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: auth-srv
+spec:
+  selector:
+    app: auth
+  ports:
+    - name: auth
+      protocol: TCP
+      port: 3000
+      targetPort: 3000

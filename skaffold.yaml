@@ -1,0 +1,17 @@
+apiVersion: skaffold/v4beta3
+kind: Config
+manifests:
+  rawYaml:
+    - ./infra/k8s/*
+build:
+  local:
+    push: false
+  artifacts:
+    - image: emmytobs/auth
+      context: auth # refers to the auth folder
+      sync:
+        manual:
+          - src: src/**/*.ts # refers to the path of the files, whose changes will trigger a pod update
+            dest: .
+      docker:
+        dockerfile: Dockerfile
