@@ -4,9 +4,9 @@ import { SignInDTO } from './dto';
 import * as authRepo from '../../repo'
 import { IncorrectCredentialsError } from './errors';
 import { AuthService } from '../../services/auth-service';
-import { JWTClaims } from '../../types';
+import { JWTClaims } from '../../../../common/src/types';
 import { body } from 'express-validator';
-import { validateRequestBody } from '../../middleware/validate-request';
+import { validateRequestBody } from '@/common/middleware';
 
 const router = express.Router();
 

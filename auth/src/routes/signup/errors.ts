@@ -1,4 +1,4 @@
-import { BaseError } from "../../errors";
+import { BaseError } from "@/common/errors";
 
 export class EmailAlreadyExistsError extends BaseError {
     statusCode = 400;

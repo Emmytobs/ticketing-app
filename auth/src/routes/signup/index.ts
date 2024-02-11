@@ -5,8 +5,8 @@ import { getUserByEmail } from '../../repo';
 import { EmailAlreadyExistsError } from './errors';
 import { User } from '../../models/user';
 import { SignUpDTO } from './dto';
-import { JWTClaims } from '../../types'; 
-import { validateRequestBody } from '../../middleware/validate-request';
+import { JWTClaims } from '../../../../common/src/types'; 
+import { validateRequestBody } from '@/common/middleware';
 
 const router = express.Router();
 
